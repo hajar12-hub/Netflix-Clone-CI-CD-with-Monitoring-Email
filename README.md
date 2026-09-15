@@ -1,4 +1,4 @@
-# 🎬 Netflix Clone DevSecOps CI/CD Pipeline
+#  Netflix Clone DevSecOps CI/CD Pipeline
 
 An end-to-end **DevSecOps project** that automates the build, security analysis, containerization, deployment, and monitoring of a Netflix Clone application using **Jenkins, Docker, Kubernetes, SonarQube, OWASP Dependency-Check, Trivy, Prometheus, Grafana, and AWS EC2**.
 
@@ -6,7 +6,7 @@ An end-to-end **DevSecOps project** that automates the build, security analysis,
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 The goal of this project is to build a complete **CI/CD pipeline** for a Netflix Clone application and deploy it to a **Kubernetes cluster running on AWS**.
 
@@ -26,7 +26,7 @@ The pipeline performs:
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```text
 GitHub
@@ -73,7 +73,7 @@ Kubernetes Nodes
 
 ---
 
-# 🛠️ Technologies Used
+#  Technologies Used
 
 | Category | Technology |
 |---|---|
@@ -99,7 +99,7 @@ Kubernetes Nodes
 
 ---
 
-# ☁️ 1. AWS EC2 Infrastructure
+#  1. AWS EC2 Infrastructure
 
 The project is hosted on **AWS EC2**.
 
@@ -131,7 +131,7 @@ The existing DevSecOps EC2 instance was reused as the **Kubernetes worker**, avo
 
 ---
 
-## 🔐 AWS Security Groups
+##  AWS Security Groups
 
 AWS Security Groups control which services can communicate with the EC2 instances.
 
@@ -153,7 +153,7 @@ SSH access is restricted to a trusted client IP.
 
 ---
 
-# 🔑 2. SSH Access
+#  2. SSH Access
 
 SSH is used to securely connect from the local machine to the AWS Ubuntu servers.
 
@@ -167,7 +167,7 @@ SSH allows remote administration of the EC2 instances, including installing tool
 
 ---
 
-# ⚙️ 3. Jenkins Setup
+#  3. Jenkins Setup
 
 Jenkins is the **CI/CD orchestrator** of the project.
 
@@ -191,7 +191,7 @@ Jenkins plugins/integrations include:
 
 ---
 
-# 📥 4. GitHub Checkout
+#  4. GitHub Checkout
 
 Jenkins retrieves the Netflix Clone source code from GitHub.
 
@@ -214,7 +214,7 @@ Jenkins Workspace
 
 ---
 
-# 📦 5. Install Dependencies
+#  5. Install Dependencies
 
 Jenkins installs the Node.js dependencies required by the React application.
 
@@ -230,7 +230,7 @@ stage('Install Dependencies') {
 
 ---
 
-# 🔍 6. SonarQube Analysis
+#  6. SonarQube Analysis
 
 SonarQube performs static code analysis.
 
@@ -274,7 +274,7 @@ SonarQube
 
 ---
 
-# 🚦 7. SonarQube Quality Gate
+#  7. SonarQube Quality Gate
 
 After SonarQube finishes the analysis, Jenkins checks the **Quality Gate**.
 
@@ -307,7 +307,7 @@ Jenkins
 
 ---
 
-# 🛡️ 8. OWASP Dependency-Check
+#  8. OWASP Dependency-Check
 
 OWASP Dependency-Check scans application dependencies for known vulnerabilities.
 
@@ -341,7 +341,7 @@ Vulnerability Report
 
 ---
 
-# 🔐 9. Trivy Filesystem Scan
+#  9. Trivy Filesystem Scan
 
 Trivy scans the project filesystem before the Docker image is built.
 
@@ -357,7 +357,7 @@ This provides another security layer in the CI pipeline.
 
 ---
 
-# 🐳 10. Docker
+#  10. Docker
 
 Docker packages the Netflix application and its runtime into a portable image.
 
@@ -414,7 +414,7 @@ Docker Image
 
 ---
 
-# 🏗️ 11. Docker Image Build
+#  11. Docker Image Build
 
 Jenkins builds the Docker image.
 
@@ -464,7 +464,7 @@ Vulnerability Report
 
 ---
 
-# 🐳 13. DockerHub Push
+#  13. DockerHub Push
 
 After the image is built and scanned, Jenkins pushes it to DockerHub.
 
@@ -510,7 +510,7 @@ DockerHub
 
 ---
 
-# ☸️ 14. Kubernetes Cluster
+#  14. Kubernetes Cluster
 
 The Kubernetes cluster was created manually using **kubeadm**.
 
@@ -533,7 +533,7 @@ The environment uses Kubernetes **v1.37**.
 
 ---
 
-# ⚙️ 15. Kubernetes Node Preparation
+#  15. Kubernetes Node Preparation
 
 Before initializing Kubernetes, the nodes were prepared.
 
@@ -560,7 +560,7 @@ net.ipv4.ip_forward = 1
 
 ---
 
-# 📦 16. containerd
+#  16. containerd
 
 Kubernetes uses **containerd** as its container runtime.
 
@@ -597,7 +597,7 @@ After initialization, Kubernetes generated a `kubeadm join` command for adding w
 
 ---
 
-# 👷 18. Kubernetes Worker
+#  18. Kubernetes Worker
 
 The existing DevSecOps EC2 server was joined to the Kubernetes cluster as the **worker node**.
 
@@ -618,7 +618,7 @@ Worker        → Ready
 
 ---
 
-# 🌐 19. Flannel CNI
+#  19. Flannel CNI
 
 Initially, the Kubernetes nodes appeared as:
 
@@ -662,7 +662,7 @@ Running
 
 ---
 
-# 🚀 20. Kubernetes Deployment
+#  20. Kubernetes Deployment
 
 The Netflix application repository contains:
 
@@ -727,7 +727,7 @@ kubectl get pods -o wide
 
 ---
 
-# 🌍 21. Kubernetes NodePort Service
+#  21. Kubernetes NodePort Service
 
 A Kubernetes **NodePort Service** exposes the Netflix application outside the cluster.
 
@@ -770,7 +770,7 @@ React Application
 
 ---
 
-# 🐞 22. Kubernetes Kubelet Troubleshooting
+#  22. Kubernetes Kubelet Troubleshooting
 
 While testing:
 
@@ -804,7 +804,7 @@ worked successfully and returned the Nginx logs.
 
 ---
 
-# 🔄 23. Jenkins → Kubernetes Integration
+#  23. Jenkins → Kubernetes Integration
 
 The next objective was to allow Jenkins to automatically deploy to Kubernetes.
 
@@ -826,7 +826,7 @@ The kubeconfig is stored securely and should **never be committed to GitHub**.
 
 ---
 
-# 🚀 24. Kubernetes Deployment from Jenkins
+#  24. Kubernetes Deployment from Jenkins
 
 Jenkins can execute the Kubernetes manifests after pushing the Docker image.
 
@@ -865,7 +865,7 @@ Netflix Pods
 
 ---
 
-# 📊 25. Prometheus Monitoring
+#  25. Prometheus Monitoring
 
 Prometheus is used to collect infrastructure and Jenkins metrics.
 
@@ -896,7 +896,7 @@ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
 
 ---
 
-# 📈 26. Node Exporter
+#  26. Node Exporter
 
 Node Exporter exposes Linux system metrics on:
 
@@ -921,7 +921,7 @@ curl http://<NODE_PRIVATE_IP>:9100/metrics
 
 ---
 
-# 🖥️ 27. Kubernetes Control Plane Monitoring
+#  27. Kubernetes Control Plane Monitoring
 
 Node Exporter was installed on the Kubernetes Control Plane.
 
@@ -944,7 +944,7 @@ This confirms that Prometheus can successfully collect metrics from the Kubernet
 
 ---
 
-# 🔧 28. Jenkins Monitoring
+#  28. Jenkins Monitoring
 
 The Jenkins Prometheus plugin exposes Jenkins metrics.
 
@@ -966,7 +966,7 @@ jenkins (1/1 up)
 
 ---
 
-# 📊 29. Prometheus Targets
+#  29. Prometheus Targets
 
 The final Prometheus targets include:
 
@@ -981,7 +981,7 @@ This confirms that Prometheus is successfully collecting metrics from the infras
 
 ---
 
-# 📉 30. Grafana
+#  30. Grafana
 
 Grafana is used to visualize the metrics collected by Prometheus.
 
@@ -1010,7 +1010,7 @@ The Kubernetes Control Plane can be selected from the dashboard to display its m
 
 ---
 
-# 🔐 Security Throughout the Pipeline
+#  Security Throughout the Pipeline
 
 Security is integrated at several levels.
 
@@ -1066,7 +1066,7 @@ Passwords
 
 ---
 
-# 🐞 Problems Solved During the Project
+#  Problems Solved During the Project
 
 Several real DevOps problems were encountered and solved:
 
@@ -1097,7 +1097,7 @@ Several real DevOps problems were encountered and solved:
 
 ---
 
-# 🔄 Complete DevSecOps Pipeline
+#  Complete DevSecOps Pipeline
 
 ```text
 Developer
@@ -1148,7 +1148,7 @@ Jenkins
 
 ---
 
-# 📈 Complete Monitoring Flow
+#  Complete Monitoring Flow
 
 ```text
 Kubernetes Control Plane
@@ -1171,7 +1171,7 @@ Kubernetes Control Plane
 
 ---
 
-# 📁 Repository Structure
+#  Repository Structure
 
 ```text
 Netflix-Clone-CI-CD-with-Monitoring-Email/
@@ -1197,7 +1197,7 @@ Netflix-Clone-CI-CD-with-Monitoring-Email/
 
 ---
 
-# 📸 Recommended Screenshots
+#  Recommended Screenshots
 
 The repository can include screenshots showing the results of each major DevSecOps stage:
 
@@ -1213,11 +1213,11 @@ The repository can include screenshots showing the results of each major DevSecO
 - Prometheus Targets
 - Grafana Node Exporter dashboard
 
-> ⚠️ Always verify screenshots before committing them. Never expose API keys, passwords, tokens, private keys, or other credentials.
+>  Always verify screenshots before committing them. Never expose API keys, passwords, tokens, private keys, or other credentials.
 
 ---
 
-# ✅ Project Status
+#  Project Status
 
 - [x] AWS EC2 infrastructure
 - [x] Git & GitHub
@@ -1275,7 +1275,7 @@ Through this project, I gained hands-on experience with:
 
 ---
 
-# 🚧 Next Step
+#  Next Step
 
 The next step of the project is:
 
