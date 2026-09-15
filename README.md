@@ -1245,7 +1245,7 @@ The repository can include screenshots showing the results of each major DevSecO
 - [x] Jenkins monitoring
 - [x] Kubernetes Control Plane monitoring
 - [x] Grafana
-- [ ] Jenkins email notifications
+- [x] Jenkins email notifications
 
 ---
 
@@ -1275,23 +1275,7 @@ Through this project, I gained hands-on experience with:
 
 ---
 
-#  Next Step
 
-The next step of the project is:
-
-```text
-Jenkins Email Notifications
-```
-
-The goal is to automatically send notifications when the CI/CD pipeline:
-
-```text
-✅ Succeeds
-❌ Fails
-⚠️ Becomes unstable
-```
-
----
 
 # 👩‍💻 Author
 
