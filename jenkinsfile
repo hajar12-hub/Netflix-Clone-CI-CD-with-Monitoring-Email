@@ -1,0 +1,111 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'nodejs'
+        jdk 'jdk17'
+    }
+
+    stages {
+
+        stage('Checkout from Git') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/hajar12-hub/Netflix-clone.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
+                sh 'npm install'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+
+                    withSonarQubeEnv('sonar-server') {
+                        sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=Netflix \
+                        -Dsonar.projectName=Netflix \
+                        -Dsonar.sources=.
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: true,
+                                       credentialsId: 'Sonar-token'
+                }
+            }
+        }
+
+        stage('OWASP Dependency Check') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./',
+                                odcInstallation: 'DP-Check',
+                                nvdCredentialsId: 'nvd-api-key'
+
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
+        stage('Trivy File System Scan') {
+            steps {
+                sh 'trivy fs .'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t netflix:${BUILD_NUMBER} .'
+            }
+        }
+
+        stage('Trivy Image Scan') {
+            steps {
+                sh 'trivy image netflix:${BUILD_NUMBER}'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-credentials',
+                        usernameVariable: 'DOCKERHUB_USER',
+                        passwordVariable: 'DOCKERHUB_TOKEN'
+                    )
+                ]) {
+                    sh '''
+                        echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
+
+                        docker tag netflix:${BUILD_NUMBER} haja69245/netflix:${BUILD_NUMBER}
+
+                        docker push haja69245/netflix:${BUILD_NUMBER}
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                withKubeConfig([credentialsId: 'k8s']) {
+                    sh 'kubectl apply -f Kubernetes/deployment.yml'
+                    sh 'kubectl apply -f Kubernetes/service.yml'
+
+                    sh 'kubectl set image deployment/netflix-app netflix-app=haja69245/netflix:${BUILD_NUMBER}'
+                }
+            }
+        }
+    }
+}
