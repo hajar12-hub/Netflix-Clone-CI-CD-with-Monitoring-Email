@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="images/devsecops-architecture.png" alt="Netflix Clone DevSecOps Architecture" width="900">
+</p>
 #  Netflix Clone DevSecOps CI/CD Pipeline
 
 An end-to-end **DevSecOps project** that automates the build, security analysis, containerization, deployment, and monitoring of a Netflix Clone application using **Jenkins, Docker, Kubernetes, SonarQube, OWASP Dependency-Check, Trivy, Prometheus, Grafana, and AWS EC2**.
