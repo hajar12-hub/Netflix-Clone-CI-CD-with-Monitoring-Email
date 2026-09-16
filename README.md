@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/devsecops-architecture.png" alt="Netflix Clone DevSecOps Architecture" width="900">
+  <img src="./images/devsecops-architecture.png" alt="Netflix Clone DevSecOps Architecture" width="900">
 </p>
 
 #  Netflix Clone DevSecOps CI/CD Pipeline
