@@ -1175,51 +1175,6 @@ Kubernetes Control Plane
 
 ---
 
-#  Repository Structure
-
-```text
-Netflix-Clone-CI-CD-with-Monitoring-Email/
-│
-├── README.md
-│
-├── Jenkinsfile
-│
-├── Kubernetes/
-│   ├── deployment.yml
-│   └── service.yml
-│
-├── screenshots/
-│   ├── jenkins-pipeline.png
-│   ├── sonarqube.png
-│   ├── kubernetes-pods.png
-│   ├── prometheus-targets.png
-│   └── grafana-dashboard.png
-│
-└── docs/
-    └── architecture.md
-```
-
----
-
-#  Recommended Screenshots
-
-The repository can include screenshots showing the results of each major DevSecOps stage:
-
-- Jenkins successful pipeline
-- SonarQube dashboard
-- SonarQube Quality Gate
-- OWASP Dependency-Check report
-- DockerHub image
-- Kubernetes nodes
-- Kubernetes Pods
-- Kubernetes Service
-- Netflix application running on Kubernetes
-- Prometheus Targets
-- Grafana Node Exporter dashboard
-
->  Always verify screenshots before committing them. Never expose API keys, passwords, tokens, private keys, or other credentials.
-
----
 
 #  Project Status
 
